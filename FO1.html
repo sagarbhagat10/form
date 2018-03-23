@@ -1,0 +1,207 @@
+<!doctype html>
+<html ng-app=>
+<head>
+	<title> AngularJS Tabs</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js" ></script>
+	<style>
+	/*p {
+		font-size: 22px;
+		font-weight: bold;
+		font-style: italic;
+		color: rgb(62, 62, 62);
+		margin: 18px;
+	}*/
+	ul {
+		float: left;
+		border-radius: 5px;
+		border: solid 1px rgb(198, 198, 198);
+		padding: 7px 11px;
+		background-color: rgb(248,248,248);
+	}
+	li {
+		float: left;
+		background-color: rgb(200,200,200);
+		padding: 5px 19px;
+		margin: 5px 2px 5px 0px;
+		color: black;
+		list-style: none;
+	}
+	li:hover, li:hover a {
+		background-color: orange;
+		color:white;
+	}
+	li a {
+		text-decoration: none;
+		color: white;
+		font-size: 21px;
+		font-style: italic;
+		text-shadow: 1px 0px 3px rgb(157, 157, 157);
+	}
+	li:nth-child(1) { border-radius: 4px 0px 0px 4px; margin-left: 1px;}
+	li:nth-child(3) { border-radius: 0px 4px 4px 0px;}
+	.active {
+		background-color: orange;
+	}
+	</style>
+
+
+<script type="text/javascript">
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope) {
+  
+$scope.selectedTab = 0;
+
+$scope.tabSelected = function(index) {
+    $scope.selectedTab = index;
+}
+
+var isLastTab = function() {
+    return $scope.selectedTab === $scope.tabs.length-1;
+}
+
+$scope.isLastTab = isLastTab;
+
+$scope.proceed = function() {
+    if(!isLastTab()){
+        $scope.selectedTab++;
+        $scope.tabs[$scope.selectedTab].active = true;
+    }
+};
+
+</script>
+
+
+	
+</head>
+<body>
+  	<section>
+		<ul ng-init="tab = 1">
+			<li ng-class="{active:tab===1}"> 
+				<a href ng-click="tab = 1">COMPANY DETAILS</a>	
+			</li>
+			<li ng-class="{active:tab===2}"> 
+				<a href ng-click="tab = 2">CONTACT PERSON DETAILS</a> 
+			</li>
+			<li ng-class="{active:tab===3}"> 
+				<a href ng-click="tab = 3">EMPLOYEE INFORMATION</a> 
+			</li>
+			<br><br>
+
+         
+			<div ng-show="tab === 1">  
+            <form>
+            <h3>COMPANY DETAILS</h3><br/>
+
+               Company Name  :  
+                   <input type="text" name="companyname" ng-model="companyname" required><br/>  
+                    
+               Website  :  
+                   <input type="text" name="website" ng-model="website" required><br/>
+
+               Billing Address  :        
+                   <input type="text" name="billingaddress" ng-model="billingaddress" required><br/>
+
+               City  :        
+                   <input type="text" name="city" ng-model="city" required><br/>
+
+               Country  :        
+                   <input type="text" name="country" ng-model="country" required><br/>
+
+
+                <button ng-click="$ctrl.addElement()" ng-disabled="frm.$invalid">Add Details</button> 
+
+                            	
+            </form>
+			</div>
+
+
+			<div ng-show="tab === 2">
+            <form>
+            <h3>CONTACT PERSON DETAILS</h3><br/>
+
+               Title  :  
+                   <input type="text" name="title" ng-model="title" required><br/>  
+                    
+               First Name  :  
+                   <input type="text" name="firstname" ng-model="firstname" required><br/>  
+               Last Name  :        
+                   <input type="text" name="lastname" ng-model="lastname" required><br/>
+
+               Job Title  :        
+                   <input type="text" name="jobtitle" ng-model="jobtitle" required><br/>
+
+               Departments  :        
+                   <input type="text" name="departments" ng-model="departments" required><br/>
+
+               Email Address  :        
+                   <input type="email" name="emailaddress" ng-model="emailaddress" required><br/>
+
+               Mobile No  :  
+                    <input type="Number" name="mobileno" ng-model="mobileno" required><br/>  
+
+               Nationality  :         
+                    <input type="text" name="nationality" ng-model="nationality" required><br/>  
+
+               Gender :  
+                    <input type="text" name="gender" ng-model="gender" required><br/>
+
+                <button ng-click="$ctrl.addElement()" ng-disabled="frm.$invalid">Add Contact Details</button>
+
+                             	
+            </form>
+            </div>
+
+
+			      <div ng-show="tab === 3">
+			      <form>
+            <h3>EMPLOYEE INFORMATION</h3><br/>
+
+                        Title  :  
+  
+                    
+                        <input type="text" name="title" ng-model="title" required><br />  
+                    
+            
+                         First Name  :  
+  
+                   
+                        <input type="text" name="firstname" ng-model="firstname" required><br />  
+                    
+            
+                        Last Name  :  
+  
+                      
+                        <input type="text" name="lastname" ng-model="lastname" required><br />  
+             
+                    
+                         Email Address  :  
+  
+                   
+                        <input type="Email" name="emailaddress" ng-model="emailaddress" required><br />  
+             
+            
+                        Gender :  
+  
+                      
+                        <input type="text" name="gender" ng-model="gender" required><br />
+
+                        <button ng-click="$ctrl.addElement()" ng-disabled="frm.$invalid">Add Employee</button>
+
+                                     	
+            </form> 
+            
+			</div>
+      
+     <button ng-show="!isLastTab()" class="btn btn-small" ng-click="proceed()">Next</button><br>
+     <button ng-show="isLastTab()" class="btn btn-small" ng-click="proceed()">Finish</button>
+
+	
+
+
+
+
+
+		</ul>		
+	</section>		
+</body>
+</html>
